@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head.ejs') %>
+    <%- include('partials/cssdeck.ejs') %>
+
+    <title>Battle Drome</title>
+    <meta property="og:url" content="" />
+    <meta property="og:title" content="" />
+    <meta property="og:site_name" content="ChaoticRP">
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="" />
+    <meta property="og:image:width" content="600">
+    <meta property="og:image:height" content="350">
+<style>
+        .location-deck{
+            width: 100%;
+        }
+#getDeck{
+height: 20vh;
+
+}
+.mugics{
+padding: 1% 1%;
+}
+    </style>
+</head>
+
+<body>
+
+    <%- include("partials/navbarlogin.ejs") %>
+
+
+    <div class="relative ">
+        <div class="container  ">
+            <div>
+                <div class="mode-break" onclick="activeModeBreak()">
+                    <h2 class="contentENG">Mode break imersion</h2>
+                    <h2 class="translation">Modo de quebra de imersão</h2>
+                    <div class="animation-div">
+                        <div class="animated-div"></div>
+                    </div>
+                </div>
+
+                <section class="section-filter">
+                    <div id="filters">
+                        <div onclick="filterTribe(this)" title="overworld">
+                            <img src="/img/icon-over.png" alt="">
+                            <p>OverWorld</p>
+                        </div>
+                        <div onclick="filterTribe(this)" title="underworld">
+                            <img src="/img/icon-under.png" alt="">
+                            <p>UnderWorld</p>
+                        </div>
+                        <div onclick="filterTribe(this)" title="mipedian">
+                            <img src="/img/icon-mipe.png" alt="">
+                            <p>Mipedian</p>
+                        </div>
+                        <div onclick="filterTribe(this)" title="danian">
+                            <img src="/img/icon-danian.png" alt="">
+                            <p>Danian</p>
+                        </div>
+                        <div onclick="filterTribe(this)" title="marr">
+                            <img src="/img/icon-marr.png" alt="">
+                            <p>M'arrllian</p>
+                        </div>
+                        <div onclick="filterTribe(this)" title="all">
+                            <img src="/img/icon-generic.png" alt="">
+                            <p>All Tribes</p>
+                        </div>
+                        <div onclick="addAtcks(this)" title="atck">
+                            <img src="/img/icon-atck.png" alt="">
+                            <p>Add ATK</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="relative d-flex  template-bg">
+                <img src="/img/battletemplate.png" class="template-drome" alt="">
+                <img src="/img/battletemplate-mobile.png" class="template-drome-mobile" alt="">
+                <div class="absolute d-flex position-cards">
+                    <div class="left">
+
+                        <div id="carousel1" class="carousel slide " data-interval="false" data-ride="carousel">
+
+                            <div class="carousel-inner" id='createCarousel'>
+                                <div class="carousel-item active">
+                                    <img class=" slide slide-img" src="/img/tutorial.png" alt="img tutorial how to use">
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="seletor ">
+                            <img class="selector2 " src="/img/seletorpro4-pro.png" alt="">
+                            <div class="seletores d-flex">
+
+                                <div class="listbox">
+                                    <div class="btn-top1 " onclick="locationSelectorUp()">
+                                        <a class="carousel-control-next button1 " href="#carousel1" role="button"
+                                            data-slide="next">
+                                            <span class="carousel-control-next-icon " aria-hidden="true"></span>
+                                            <span class="sr-only ">Próximo</span>
+                                        </a>
+                                    </div>
+                                    <div class="btn-bott1 " onclick="locationSelectorDown()">
+                                        <a class="carousel-control-prev  button2 " href="#carousel1" role="button"
+                                            data-slide="prev">
+                                            <span class="carousel-control-prev-icon " aria-hidden="true"></span>
+                                            <span class="sr-only ">Anterior</span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="listbox">
+                                    <div class="btn-top2 " onclick="mugicSelectorUp()">
+                                        <a class="carousel-control-next button1 " href="#carousel1" role="button"
+                                            data-slide="next">
+                                            <span class="carousel-control-next-icon " aria-hidden="true"></span>
+                                            <span class="sr-only ">Próximo</span>
+                                        </a>
+                                    </div>
+                                    <div class="btn-bott2 " onclick="mugicSelectorDown()">
+                                        <a class="carousel-control-prev  button2 " href="#carousel1" role="button"
+                                            data-slide="prev">
+                                            <span class="carousel-control-prev-icon " aria-hidden="true"></span>
+                                            <span class="sr-only ">Anterior</span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="listbox">
+                                    <div class="btn-top3 " onclick="battlegearSelectorUp()">
+                                        <a class="carousel-control-next button1 " href="#carousel1" role="button"
+                                            data-slide="next">
+                                            <span class="carousel-control-next-icon " aria-hidden="true"></span>
+                                            <span class="sr-only ">Próximo</span>
+                                        </a>
+                                    </div>
+                                    <div class="btn-bott3 " onclick="battlegearSelectorDown()">
+                                        <a class="carousel-control-prev  button2 " href="#carousel1" role="button"
+                                            data-slide="prev">
+                                            <span class="carousel-control-prev-icon " aria-hidden="true"></span>
+                                            <span class="sr-only ">Anterior</span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="listbox">
+                                    <div class="btn-top4 " onclick="creatureSelectorUp()">
+                                        <a class="carousel-control-next button1 " href="#carousel1" role="button"
+                                            data-slide="next">
+                                            <span class="carousel-control-next-icon " aria-hidden="true"></span>
+                                            <span class="sr-only ">Próximo</span>
+                                        </a>
+                                    </div>
+                                    <div class="btn-bott4 " onclick="creatureSelectorDown()">
+                                        <a class="carousel-control-prev  button2" href="#carousel1" role="button"
+                                            data-slide="prev">
+                                            <span class="carousel-control-prev-icon " aria-hidden="true"></span>
+                                            <span class="sr-only ">Anterior</span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+
+
+                        </div>
+
+
+
+
+                    </div>
+
+                    <div class="mugic  ">
+
+                        <div class="grid-view col-mugic" onclick=" mugicSRC(this)">
+                            <img src="/img/mugic-mipe.png" class="mugics ocult" onmouseover="mugicView(this)"
+                                ontouchstart='mugicView(this)' alt="1">
+                        </div>
+
+
+
+
+
+                        <div class="grid-view col-mugic" onclick=" mugicSRC(this)">
+                            <img src="/img/mugic-marr.png" class="mugics ocult" onmouseover="mugicView(this)"
+                                ontouchstart='mugicView(this)' alt="2">
+                        </div>
+                        <div class="grid-view col-mugic" onclick=" mugicSRC(this)">
+                            <img src="/img/mugic-generic.png" class="mugics ocult" onmouseover="mugicView(this)"
+                                ontouchstart='mugicView(this)' alt="3">
+                        </div>
+                        <div class="grid-view col-mugic" onclick=" mugicSRC(this)">
+                            <img src="/img/mugic-over.png" class="mugics ocult" onmouseover="mugicView(this)"
+                                ontouchstart='mugicView(this)' alt="4">
+                        </div>
+                        <div class="grid-view col-mugic" onclick=" mugicSRC(this)">
+                            <img src="/img/mugic-under.png" class="mugics ocult" onmouseover="mugicView(this)"
+                                ontouchstart='mugicView(this)' alt="5">
+                        </div>
+                        <div class="grid-view col-mugic" onclick=" mugicSRC(this)">
+                            <img src="/img/mugic-danian.png" class="mugics ocult" onmouseover="mugicView(this)"
+                                ontouchstart='mugicView(this)' alt="6">
+                        </div>
+                    </div>
+
+
+
+                    <div class="mugic-view">
+
+                        <div class="mugic-view-img" onmouseout="hideOut(this)" ontouchstart="hideOut(this)">
+                            <img src="/img/mugic-generic.png" class="mugic-img  " alt="1" title="card name">
+                        </div>
+
+                        <div class="mugic-view-img" onmouseout="hideOut(this)" ontouchstart="hideOut(this)">
+                            <img src="/img/mugic-generic.png" class="mugic-img  " alt="2">
+                        </div>
+
+                        <div class="mugic-view-img" onmouseout="hideOut(this)" ontouchstart="hideOut(this)">
+                            <img src="/img/mugic-generic.png" class="mugic-img  " alt="3">
+                        </div>
+
+                        <div class="mugic-view-img" onmouseout="hideOut(this)" ontouchstart="hideOut(this)">
+                            <img src="/img/mugic-generic.png" class="mugic-img  " alt="4">
+                        </div>
+
+                        <div class="mugic-view-img" onmouseout="hideOut(this)" ontouchstart="hideOut(this)">
+                            <img src="/img/mugic-generic.png" class="mugic-img  " alt="5">
+                        </div>
+
+                        <div class="mugic-view-img" onmouseout="hideOut(this)" ontouchstart="hideOut(this)">
+                            <img src="/img/mugic-generic.png" class="mugic-img  " alt="6">
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="part1  ">
+                        <div class="locations">
+                            <div class="addLocation">
+                                <div class="location-deck  " onclick="addLocation()">
+                                    <p>0/10</p>
+                                    <div id="locationcard" onclick="locationView()">
+                                        <img src="/img/Card_Location_Deck.png" alt="">
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="grid-view col-card1" onclick="cardSRC(this)">
+                            <img class="cards img1 card1  ocult " alt="image of creature of Chaotic card game">
+                        </div>
+                        <div class="grid-view battlegear " onclick="battlegearSRC(this)">
+
+                            <div class="absolute">
+                                <img class="battlegear-image ">
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div class="part2 ">
+                        <div class="grid-view part2-col" onclick="cardSRC(this)">
+                            <img class="cards img1  ocult card2 " alt="image of creature of Chaotic card game">
+                        </div>
+                        <div class="grid-view battlegear " onclick="battlegearSRC(this)">
+
+                            <div class="absolute">
+                                <img class="battlegear-image  ">
+                            </div>
+
+                        </div>
+
+                        <div class="grid-view part2-col-3"></div>
+
+                        <div class="grid-view part2-col" onclick="cardSRC(this)">
+                            <img class="cards img1  ocult card3 " alt="image of creature of Chaotic card game">
+                        </div>
+                        <div class="grid-view battlegear " onclick="battlegearSRC(this)">
+
+                            <div class="absolute">
+                                <img class="battlegear-image ">
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="part3  ">
+                        <div class="grid-view part3-col" onclick="cardSRC(this)">
+                            <img class="cards img1  ocult card4 " alt="image of creature of Chaotic card game">
+                        </div>
+                        <div class="grid-view battlegear " onclick="battlegearSRC(this)">
+
+                            <div class="absolute">
+                                <img class="battlegear-image ">
+                            </div>
+
+                        </div>
+                        <div class="grid-view part3-col" onclick="cardSRC(this)">
+                            <img class="cards img1  ocult card5 " alt="image of creature of Chaotic card game">
+                        </div>
+                        <div class="grid-view battlegear " onclick="battlegearSRC(this)">
+
+                            <div class="absolute">
+                                <img class="battlegear-image ">
+                            </div>
+
+                        </div>
+                        <div class="grid-view part3-col " onclick="cardSRC(this)">
+                            <img class="cards img1  ocult card6 " alt="image of creature of Chaotic card game">
+                        </div>
+                        <div class="grid-view battlegear " onclick="battlegearSRC(this)">
+
+                            <div class="absolute">
+                                <img class="battlegear-image ">
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="location-view  absolute  ">
+                    <div class="container-location relative d-flex">
+                        <div class="port absolute">
+
+                        </div>
+                        <div class="container-locationList">
+                            <div class="locationList">
+
+
+                            </div>
+                            <button class="button-list" onclick="locationView()"><img src="/img/arrow-left.png"
+                                    alt=""></button>
+                        </div>
+                        <div class="starboard absolute">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="deck-attack-section">
+                <h2 id="yourCards">YOUR CARDS</h2>
+                <section id="attacklist">
+
+
+                    <ol id='createATK'>
+
+
+
+
+
+
+
+
+                    </ol>
+
+
+                </section>
+                <section id="cardsDeck">
+
+                    <h2 class="contentENG">Cards in the deck</h2>
+                    <h2 class="translation">Cartas no deck</h2>
+                    <div class="deckoverflow">
+                        <div class="listcardsDeck">
+
+
+                        </div>
+                    </div>
+
+                </section>
+                <section class="counterAttack">
+                    <h2>0/20</h2>
+
+                </section>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <ul id="list">
+        <audio id="audio1" src="/audio/victory.ogg"></audio>
+        <audio id="audio2" src="/audio/onClick.ogg"></audio>
+        <audio id="audio3" src="/audio/onSelect13.ogg"></audio>
+    </ul>
+    
+
+<div id="getDeck" style="display: flex; flex-direction: column;justify-content: center;align-items: center;">
+        <form>
+            <div class="form-group row">
+                <label for="text" class="col-12 col-form-label">Deck Name</label>
+                <div class="col-8">
+                    <div class="input-group">
+
+                        <input id="filename" type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12 d-flex">
+                    <button type="button" onclick=deckLisTxt() class="btn btn-danger btn-lg mr-3">Get The Deck</button>
+                    <button type="button" onclick=deckRecodeList() class="btn btn-success btn-lg ">Get RecodeDeck</button>
+                </div>
+            </div>
+        </form>
+    </div>
+       
+
+    <div id="deckList">
+        <p></p>
+    </div>
+
+    <script>
+
+        var ajax;
+        let userid = locationstorage();
+        var divCaarousel = document.getElementById("createCarousel");
+        var olATK = document.getElementById("createATK")
+        if (window.XMLHttpRequest) {
+            ajax = new XMLHttpRequest();
+        } else {
+            ajax = new ActiveXObject();
+        };
+        ajax.onreadystatechange = function () { // Chama a função quando o estado mudar.
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                // Requisição finalizada. Faça o processamento aqui.
+
+                let creature = [];
+                let battlegear = [];
+                let mugic = [];
+                let location = [];
+                let atk = [];
+                let collection = [];
+                let ajaxResponse = JSON.parse(ajax.response);
+                var rigthCard;
+                let carouselJSON = ajaxJSON(ajaxResponse);
+
+
+                carouselJSON.userCollection.forEach(card => {
+                    rigthCard = false;
+
+                    for (let i = 0; rigthCard != true; i++) {
+                        if (card.card_id === carouselJSON.cards[i].id) {
+                            let cardData = carouselJSON.cards[i];
+
+                            collection.push(cardData)
+                            rigthCard = true;
+                        }
+                        if (i > carouselJSON.cards.length) {
+                            rigthCard = true;
+                            console.log('deu bug');
+                        }
+                    }
+
+                })
+                collection.forEach(card => {
+                    rigthCard = card.id;
+                    let tribe;
+
+                    let cardType;
+                    function cardTypes(cardType) {
+
+                        return cardType.card_id == rigthCard;
+                    }
+                    types = carouselJSON.cardType.filter(cardTypes);
+
+                    types.forEach(type => {
+                        switch (type.cardtype_id) {
+                            case 1:
+                                cardType = 'creature';
+                                break;
+                            case 2:
+                                cardType = 'battlegear';
+                                break;
+                            case 3:
+                                cardType = 'mugic';
+                                break;
+                            case 4:
+                                cardType = 'location';
+                                break;
+                            case 5:
+                                cardType = 'attack';
+                                break;
+                            case 6:
+                                tribe = 'danian';
+                                break;
+                            case 7:
+                                tribe = 'mipedian';
+                                break;
+                            case 8:
+                                tribe = 'marr';
+                                break;
+                            case 9:
+                                tribe = 'overworld';
+                                break;
+                            case 10:
+                                tribe = 'underworld';
+                                break;
+                            case 11:
+                                tribe = 'generic';
+                                break;
+                            default:
+                                console.log("");
+                        }
+                    })
+                    switch (cardType) {
+                        case 'creature':
+                            creature.push({ card, cardType, tribe });
+                            break;
+                        case 'battlegear':
+                            battlegear.push({ card, cardType });
+                            break;
+                        case 'mugic':
+                            mugic.push({ card, cardType, tribe });
+                            break;
+                        case 'location':
+                            location.push({ card, cardType });
+                            break;
+                        case 'attack':
+                            atk.push({ card, cardType });
+                            break;
+                        default:
+                            console.log("");
+                    }
+
+
+
+
+
+
+                })
+                let carouselHTML = { creature, battlegear, mugic, location, atk }
+                createCarousel(carouselHTML);
+
+
+            }
+        }
+        ajax.open('POST', '/decklist');
+        ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        ajax.send(`userID=${userid}`);
+
+        function locationstorage() {
+
+
+            let getUserID = localStorage.getItem("userID");
+            return getUserID;
+
+
+        }
+        function createCarousel(data) {
+            data.creature.forEach(cardData => {
+                divCaarousel.innerHTML += ` <div class="carousel-item" >
+                                    <img class="${cardData.cardType}-card ${cardData.tribe} slide slide-img" src="${cardData.card.fullart}"
+                                        title="${cardData.card.name}">
+                                </div>`;
+            });
+            data.battlegear.forEach(cardData => {
+                divCaarousel.innerHTML += `  <div class="carousel-item">
+                                    <img class="${cardData.cardType}-card  slide-img" src="${cardData.card.fullart}"
+                                        alt="${cardData.card.url}" title="${cardData.card.name}">
+                                </div>`;
+            });
+            data.mugic.forEach(cardData => {
+                divCaarousel.innerHTML += ` <div class="carousel-item">
+                                    <img class="${cardData.cardType}-card ${cardData.tribe} slide-img" src="${cardData.card.fullart}"
+                                        alt="${cardData.card.url}" title="${cardData.card.name}">
+                                </div>`;
+            });
+            data.location.forEach(cardData => {
+                divCaarousel.innerHTML += `<div class="carousel-item">
+                                    <img class="${cardData.cardType}-card  slide-img" src="${cardData.card.fullart}"
+                                        alt="${cardData.card.url}" title="${cardData.card.name}">
+                                </div>`;
+            });
+            data.atk.forEach(cardData => {
+                olATK.innerHTML += `<li onmouseover=" ActiveElementChild(this)" onmouseout="removeElementChildActiveMouseOut()">
+                            <img src="${cardData.card.url}" alt="" title="${cardData.card.name}">
+                            <button type="button" onclick="addAttack()">
+                                <i data-feather="plus" color="#FF0000"></i>ADD
+                            </button>
+                        </li>`
+            });
+        }
+        function ajaxJSON(data) {
+            return {
+                cards: data.card,
+                userCollection: data.usercards,
+                cardType: data.searchcard
+
+            }
+        }
+
+
+
+    </script>
+
+    <%- include('partials/script.ejs') %>
+    <%- include('partials/deckjs.ejs') %>
+    <%- include('partials/shareDeckList.ejs') %>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        feather.replace()
+var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+function fox(){
+if(isFirefox){
+    let  mugicsFirefox = document.querySelectorAll(".mugics");
+     mugicsFirefox.forEach(data => data.style.padding = "5% 2%");
+console.log('hi fox')
+}
+}
+setTimeout(fox, 3000);
+
+
+
+function GetDeckList(){
+  let deckListCreature = document.querySelectorAll(".deckList-creature") || [''];
+    let deckListBattle = document.querySelectorAll(".deckList-batt") || [''];
+    let deckListMugic = document.querySelectorAll(".deckList-mugic") || [''];
+    let deckListLocation = document.querySelectorAll(".deckList-location") || [''];
+    let deckListAtk = document.querySelectorAll(".deckList-atk") || [''];
+    let creatureArry = [...deckListCreature].map(element => element.title),
+        battlegearArry = [...deckListBattle].map(element => element.title),
+        mugicArry = [...deckListMugic].map(element => element.title),
+        locationArry = [...deckListLocation].map(element => element.title),
+        atkArry = [...deckListAtk].map(element => element.title);
+    let creatureList = `==== CREATURE ====` + "\r\n";
+    let battlegearList = `=== BATTLEGEAR ===` + "\r\n";
+    let mugicList = `===== MUGIC =====` + "\r\n";
+    let locationList = `==== LOCATION ====` + "\r\n";
+    let atkList = `===== ATK ======` + "\r\n";
+
+
+    creatureArry.forEach(title => {
+        creatureList += `${title}` + "\r\n"
+    });
+    battlegearArry.forEach(title => {
+        battlegearList += `${title}` + "\r\n"
+    });
+    mugicArry.forEach(title => {
+        mugicList += `${title}` + "\r\n"
+    });
+    locationArry.forEach(title => {
+        locationList += `${title}` + "\r\n"
+    });
+    atkArry.forEach(title => {
+        atkList += `${title}` + "\r\n"
+    });
+
+    let deckList = `${creatureList}
+${battlegearList}
+${mugicList}
+${locationList}
+${atkList}`;
+
+    return deckList;
+}
+
+
+function download(filename, text) {
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+        };
+
+        // Start file download.
+        function exportNormal(filename) {
+            content = GetDeckList();
+            download("hello.txt", content);
+        };
+
+        function exportRecode(filename) {
+            content = GetDeckList();
+            download("hello.txt", content);
+        };
+function deckLisTxt(){
+ 
+ let input = document.getElementById('filename');
+            let filename = input.value|| 'nameless';
+            content = GetDeckList();
+            download(filename + ".txt", content);
+};
+
+
+function deckRecodeList(){
+
+let input = document.getElementById('filename');
+            let filename = input.value || 'nameless';
+            let content = ReList();
+            download(filename + ".txt", content);
+           
+}
+
+ function ReList() {
+            let deckListCreature = document.querySelectorAll(".deckList-creature") || [''];
+            let deckListBattle = document.querySelectorAll(".deckList-batt") || [''];
+            let deckListMugic = document.querySelectorAll(".deckList-mugic") || [''];
+            let deckListLocation = document.querySelectorAll(".deckList-location") || [''];
+            let deckListAtk = document.querySelectorAll(".deckList-atk") || [''];
+            let creatureArry = [...deckListCreature].map(element => element.title),
+                battlegearArry = [...deckListBattle].map(element => element.title),
+                mugicArry = [...deckListMugic].map(element => element.title),
+                locationArry = [...deckListLocation].map(element => element.title),
+                atkArry = [...deckListAtk].map(element => element.title);
+            let creatureList = `creatures `;
+            let battlegearList = `battlegear `;
+            let mugicList = `mugic `;
+            let locationList = `locations `;
+            let atkList = `attacks `;
+
+
+            creatureArry.forEach(title => {
+                let result = title.replace(/[^a-zA-Z ]| /g, "").toLowerCase()
+                creatureList += `${result} `
+            });
+            battlegearArry.forEach(title => {
+                let result = title.replace(/[^a-zA-Z ]| /g, "").toLowerCase()
+                battlegearList += `${result} `
+            });
+            mugicArry.forEach(title => {
+                let result = title.replace(/[^a-zA-Z ]| /g, "").toLowerCase()
+                mugicList += `${result} `
+            });
+            locationArry.forEach(title => {
+                let result = title.replace(/[^a-zA-Z ]| /g, "").toLowerCase()
+                locationList += `${result} `
+            });
+            atkArry.forEach(title => {
+                let result = title.replace(/[^a-zA-Z ]| /g, "").toLowerCase()
+                atkList += `${result} `
+            });
+
+            let deckList = `${creatureList}${battlegearList}${mugicList}${locationList}${atkList}`;
+
+            return deckList;
+        }
+
+
+    </script>
+    <script src="/js/imgs.js"></script>
+</body>
+
+</html>

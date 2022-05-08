@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("head.ejs") %>
+    <meta name="description" content="All cards with their average status and more!">
+    <link rel="stylesheet" href="/css/scans.css">
+<meta name="keywords" content="Chaotic,chaoticrp,Chaotic Reborn, chaotic all cards">
+    <title>Collection</title>
+    <style>
+        h6 {
+            text-decoration-line: underline;
+        }
+
+        h1 {
+            text-decoration-line: underline;
+        }
+      #scans{
+      background-color: #fefefe;
+      justify-items: center;
+}
+#scans > div {
+margin-bottom: 20%;
+}
+    </style>
+
+</head>
+
+<body>
+    <%- include("navbar.ejs") %>
+
+
+    <div class="container container-collections mt-auto mb-auto">
+
+        <div class="alert alert-danger mt-4 contentENG" role="alert">
+            All card statistics are average and do not represent true the real cards stats. visit <a
+                href="https://chaotic.fandom.com/wiki/Category:Cards">chaotic-fandom</a>
+            to see a card's min-max stats.
+        </div>
+        <div class="alert alert-danger mt-4 translation" role="alert">
+            Todas as estatisticas das cartas são uma média e não representão as estatisticas reais das cartas. visite <a
+                href="https://chaotic.fandom.com/wiki/Category:Cards">chaotic-fandom</a>
+            para ver o min-max estatus de uma carta.
+        </div>
+        <div id="scans">
+            <% result.cards.rows.forEach(card =>{ %>
+            <div>
+                <h6> <a href="/card-overview/<%=card.id%>"> <%= card.name %></a> </h6>
+                <img src="<%= card.url %>"> </img>
+
+
+            </div>
+
+            <%  }) %>
+        </div>
+
+
+
+
+        <div class="mt-5 mb-auto">
+            <hr>
+            <div class=" mt-1 d-flex ">
+
+                <div class="col col-4">
+                    <% if(result.page == 0){ %>
+
+                    <% }else{ %>
+                    <a href="/collection/<%= result.page - 1 %>" class="btn btn-primary text-align-start"> Back</a>
+                    <% } %>
+
+                </div>
+                <div class=" col col-4 d-flex ">
+                    <% if(result.page == 0){ %>
+                    <a href="/scans-collection" class="mr-2">Scans</a>
+                    <% }else { %>
+                    <a href="/collection/0" class="mr-2">1</a>
+                    <% } %>
+                    <% for (i = result.page - 4; i != result.page; i++) {
+        
+        if ( i > 0) { %>
+
+                    <a class=" mr-1" href="/collection/<%= i %>"><%= i + 1 %></a>
+                    <% }else{ %>
+
+                    <%  } } %>
+
+
+                    <% for (i = 0; i <= result.pageNum; i++) {
+       
+       if (i + result.page >= result.pageNum) { %>
+
+                    <% } else if (i > 4 ) { %>
+
+                    <% }
+                else { %>
+
+                    <a class=" mr-1" href="/collection/<%= i + result.page  %>"><%= i + result.page +1 %></a>
+                    <% }
+
+                } %>
+                    <p class="mr-1">...</p>
+                    <%  for (i = 0; i <= result.pageNum; i++) {
+        if (i = result.pageNum) { %>
+
+                    <a href="/collection/<%= parseInt(i) %>"><%= parseInt(i + 1) %></a>
+                    <% }
+
+                } %>
+
+
+
+
+                </div>
+                <div class="col col-4 text-align-end">
+                    <% if(result.next){ %>
+                    <a href="/collection/<%= result.page + 1 %>" class="btn btn-primary text-align-end mr-0">Next</a>
+                    <% } %>
+                </div>
+
+
+
+            </div>
+
+            <hr>
+
+        </div>
+
+
+
+    </div>
+
+
+
+    <%- include("footer.ejs") %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <%- include("script.ejs") %>
+
+</body>
+
+</html>

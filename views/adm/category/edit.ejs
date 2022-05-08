@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../../partials/head.ejs") %>
+    <title>Edit Category</title>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1>Edition Category</h1>
+            </div>
+
+            <div class="card-body mt-3">
+                <form action="/create/category/edit/save" method="post">
+                    <label> Category </label>
+                    <input type="text" name="title" class="form-control mt-1" value="<%= category.title %>">
+                    <label class="mt-3">PT</label>
+                    <input type="text" name="titlebr" class="form-control mt-1" value="<%= category.titlebr %>">
+                    <input type="hidden" name="id" value="<%= category.id %>">
+                    <button class="btn btn-primary mt-2">Update</button>
+
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <%- include("../../partials/script.ejs") %>
+    <%- include("../../partials/admin.ejs") %>
+</body>
+
+</html>

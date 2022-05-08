@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../../partials/head.ejs") %>
+    <title>Edit ADM</title>
+</head>
+
+<body>
+
+    <%- include("../../partials/admnavbar.ejs") %>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1>Edit ADM</h1>
+            </div>
+
+            <div class="card-body mt-3">
+                <form action="/adm/edited" method="post">
+                    <label> Edit ADM </label>
+                    <input type="text" name="username" class="form-control mt-1" value="<%= adm.username %>">
+                    <input type="hidden" name="id" value="<%= adm.id %>">
+                    <input type="text" name="password" class="form-control mt-1" placeholder="new password">
+                    <button class="btn btn-primary mt-2">Create</button>
+
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <%- include("../../partials/script.ejs") %>
+    <%- include("../../partials/admin.ejs") %>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../../partials/head.ejs") %>
+    <title>New Overview</title>
+</head>
+
+<body>
+    <%- include("../../partials/admnavbar.ejs") %>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1>Create New Overview</h1>
+            </div>
+            <div class="card-body mt-3">
+                <form action="/adm/overview/save" method="post">
+                    <label>Overview</label>
+
+                    <textarea class="form-control mt-1 article" name="body" placeholder="Overview here"></textarea>
+
+                    <label class="mt-3">Overview BR</label class>
+
+                    <textarea class="form-control mt-1 article" name="bodybr"
+                        placeholder="Escreva o Artigo Aqui"></textarea>
+                    <label class="mt-1"> Card</label>
+
+                    <select name="cardID" class="form-control mt-1 mb-1 fit-content" id="">
+                        <% cards.forEach( card =>{ %>
+                        <option value="<%= card.id %>"> <%= card.name%> </option>
+                        <%}) %>
+                    </select>
+                    <button class="btn btn-success mt-3">Public</button>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <%- include("../../partials/footer.ejs") %>
+    <%- include("../../partials/script.ejs") %>
+    <%- include("../../partials/tiny.ejs") %>
+    <%- include("../../partials/admin.ejs") %>
+</body>
+
+</html>

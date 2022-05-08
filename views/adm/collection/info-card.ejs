@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../../partials/head.ejs") %>
+    <title>Create New CardType</title>
+</head>
+
+<body>
+
+    <%- include("../../partials/admnavbar.ejs") %>
+    <div class="container mt-5">
+        <div class="card mt-3">
+            <div class="card-header ">
+                <h3><%= card.name %></h3>
+            </div>
+            <div class="card-body ml-auto mr-auto">
+                <h5 class="card-title">
+                    <h4>Currently this card has been scanned <%= count %> times</h4>
+                </h5>
+                <p class="card-text ml-auto mr-auto"> <img src="<%= card.url %>" alt="<%= card.name %>"></p>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <%- include("../../partials/footer.ejs") %>
+    <%- include("../../partials/script.ejs") %>
+    <%- include("../../partials/admin.ejs") %>
+</body>
+
+</html>

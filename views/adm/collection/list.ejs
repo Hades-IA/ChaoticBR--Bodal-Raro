@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../../partials/head.ejs") %>
+    <title>Cardtype List</title>
+</head>
+
+<body>
+    <%- include("../../partials/admnavbar.ejs") %>
+
+    <div class="container" style="display: flex; flex-direction: column; justify-content: center; align-items: center;"  >
+        <h2>Cardtype List</h2>
+        <a href="/adm/cardtype/create" class="btn btn-info mt-4 ">Cardtype Category</a>
+      <div id="tables" class="d-flex" style="justify-content: center; align-items: center;">
+        <table class="table table-bordered table-dark mt-3 fit-content  align-center">
+            <thead>
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <% list.forEach(lista =>{ %>
+                <tr>
+                    <th><%= lista.id %></th>
+                    <th><%= lista.title %></th>
+
+
+                    <th class="d-flex">
+
+                        <a href="/adm/cardtype/edit/<%= lista.id %>" class="btn btn-warning">Edit</a>
+
+
+                        <form action="/adm/cardtype/delete" method="POST" class="d-alignCenter"
+                            onsubmit="confirmeDelete(event, this)">
+                            <input type="hidden" name="id" value="<%= lista.id  %>">
+                            <button class="btn btn-danger ml-3">Delete</button>
+                        </form>
+
+                    </th>
+                </tr>
+                <%}) %>
+
+            </tbody>
+        </table>
+      </div>
+    </div>
+
+    <%- include("../../partials/script.ejs")%>
+    <%- include("../../partials/admin.ejs")%>
+<script>
+const trlist = [...document.querySelectorAll('tr')];
+const head = document.querySelector('thead');
+var body;
+trlist.splice(0, 1);
+const tables = document.querySelector('#tables');
+
+renderTables(trlist, 40);
+tables.innerHTML += `<table class="table table-bordered table-dark mt-3 ml-3 fit-content  align-center">${head.innerHTML}
+<tbody>
+${body}
+</tbody>
+</table>
+`;
+tables.innerHTML = tables.innerHTML.split(",").join("")
+function renderTables(arrayData, maxView = 0, qt = 2) {
+    let limit = arrayData.length / qt;
+    const data = arrayData;
+    const removeTr = []
+    console.log(limit)
+    if (limit > maxView) {
+
+        var newTable = data.filter(tr => {
+            let index = data.indexOf(tr);
+
+            if (index >= limit) removeTr.push(tr);
+
+            return index >= limit;
+        });
+
+        removeTr.forEach(tr => {
+            tr.remove();
+
+        });
+
+
+        body = newTable.map(trHTML => `<tr>${trHTML.innerHTML}</tr>`);
+
+    }
+};
+</script>
+</body>
+
+</html>

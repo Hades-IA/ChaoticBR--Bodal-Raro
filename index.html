@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+   <!-- Meta tags Obrigatórias -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<link rel="shortcut icon" type="image/x-icon" href="https://i.imgur.com/Zrl8m6v.png" />
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="./public/bootstrap-4.4.1-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="./public/css/style.css">
+<link rel="stylesheet" href="./public/css/navs.css">
+
+<meta name="description" content="Todas as cartas em pt-br e guias de como jogar!">
+<link rel="stylesheet" href="./public/css/scans.css">
+<meta name="keywords" content="Chaotic,chaoticrp,Chaotic Reborn, chaotic all cards">
+<title>Collection</title>
+<style>
+    h6 {
+        text-decoration-line: underline;
+    }
+
+    h1 {
+        text-decoration-line: underline;
+    }
+  #scans{
+  background-color: #fefefe;
+  justify-items: center;
+}
+#scans > div {
+margin-bottom: 20%;
+}
+</style>
+
+    <title>Chaotic Reborn</title>
+</head>
+
+<body>
+
+
+    <header>
+        <nav class="navbar navbar-top navbar-dark navbar-expand-lg  mb-0 bg-danger">
+            <a href="" class="navbar-brand h1 mb-0">
+                <figure id='logo' alt='brand chaoticrp'>
+                    <img src="./public/img/logonovo.png" class="img-fluid logotipo" alt="logo da chaotic reborn">
+                    <p>chaotic-rp</p>
+                </figure>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSite">
+                <span class="navbar-toggler-icon"> </span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSite">
+                <ul class="navbar-nav mr-auto ml-auto">
+    
+    
+                    
+                    <li class="nav-item">
+                        <a href="/collection/0" class="nav-link ">COLLECTION</a>
+                    </li>
+                   <li class="nav-item">
+                        <a href="/booster" class="nav-link ">BOOSTER</a>
+                    </li>
+    
+                </ul>
+               
+              
+    
+    
+    
+    
+            </div>
+        </nav>
+    </header>
+
+
+ 
+
+
+    <div class="container container-collections mt-auto mb-auto">
+
+        
+        <div class="alert alert-danger mt-4 translation" role="alert">
+            Todas as estatisticas das cartas são uma média e não representão as estatisticas reais das cartas. visite <a
+                href="https://chaotic.fandom.com/wiki/Category:Cards">chaotic-fandom</a>
+            para ver o min-max estatus de uma carta.
+        </div>
+        <div id="scans">
+        
+        </div>
+
+
+
+
+        <div class="mt-5 mb-auto">
+            <hr>
+            <div class=" mt-1 d-flex ">
+
+                <div class="col col-4">
+                   if(result.page == 0){ 
+
+                     }else{ 
+                    <a href="/collection/= result.page - 1" class="btn btn-primary text-align-start"> Back</a>
+                    } 
+
+                </div>
+                <div class=" col col-4 d-flex ">
+                    if(result.page == 0){
+                    <a href="/scans-collection" class="mr-2">Scans</a>
+                    }else {
+                    <a href="/collection/0" class="mr-2">1</a>
+                    }
+                    for (i = result.page - 4; i != result.page; i++) {
+        
+        if ( i > 0) {
+
+                    <a class=" mr-1" href="/collection/= i">= i + 1</a>
+                    }else{
+
+                     } }
+
+
+                    for (i = 0; i <= result.pageNum; i++) {
+       
+       if (i + result.page >= result.pageNum) {
+
+                    } else if (i > 4 ) {
+
+                    }
+                else {
+
+                    <a class=" mr-1" href="/collection/= i + result.page ">= i + result.page +1</a>
+                    }
+
+                }
+                    <p class="mr-1">...</p>
+                     for (i = 0; i <= result.pageNum; i++) {
+        if (i = result.pageNum) {
+
+                    <a href="/collection/= parseInt(i)">= parseInt(i + 1)</a>
+                    }
+
+                }
+
+
+
+
+                </div>
+                <div class="col col-4 text-align-end">
+                    if(result.next){
+                    <a href="/collection/= result.page + 1" class="btn btn-primary text-align-end mr-0">Next</a>
+                    }
+                </div>
+
+
+
+            </div>
+
+            <hr>
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+    <!-- JavaScript (Opcional) -->
+    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+
+    <footer class="footer mt-4">
+
+
+        <p>
+            © Thanks <a href="https://chaoticbackup.github.io/">chaoticbackup</a> for the lot of info of cards
+        </p>
+        <!--© Epic Story Media Inc. © Chaotic USA Entertainment Group, Inc. Not affiliated with Epic Story Media Inc.-->
+    
+    </footer>
+    <script src="./database/db.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="./public/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+
+
+
+
+<script>
+    var cards =  cardsJson.sort(function(a,b){ result = a.name >= b.name  ? 1: -1; return result });
+   
+    console.log( cards)
+
+  
+var i = 0;
+var idElement = document.getElementById("scans");
+cards.forEach(card =>{ 
+    i++
+   if( i <= 52){ 
+       
+    idElement.innerHTML +=  ` <div>
+            <h6> <a href="/">  card.name</a> </h6>
+            <img src="${card.url}"> </img>
+        </div>` ;
+    } }) 
+  
+
+ </script> 
+
+    <!--firebase pode ir de base se n suportar o bootstrap4-->
+</body>
+
+</html>

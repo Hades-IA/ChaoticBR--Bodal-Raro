@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../../partials/head.ejs") %>
+    <title>Create New CardType</title>
+</head>
+
+<body>
+
+    <%- include("../../partials/admnavbar.ejs") %>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1>Create CardType</h1>
+            </div>
+
+            <div class="card-body mt-3">
+                <form action="/adm/cardtype/save" method="post">
+                    <label> New CardType </label>
+                    <input type="text" name="title" class="form-control mt-1" placeholder="CardType name">
+
+
+                    <button class="btn btn-primary mt-2">Create</button>
+
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <%- include("../../partials/script.ejs") %>
+    <%- include("../../partials/admin.ejs") %>
+</body>
+
+</html>

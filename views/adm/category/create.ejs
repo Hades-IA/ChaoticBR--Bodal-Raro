@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../../partials/head.ejs") %>
+    <title>Create New Category</title>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1>Create Category</h1>
+            </div>
+
+            <div class="card-body mt-3">
+                <form action="/create/category/save" method="post">
+                    <label> New Category </label>
+                    <input type="text" name="title" class="form-control mt-1" placeholder="category name">
+                    <label class="mt-3">PT</label>
+                    <input type="text" name="titlebr" class="form-control mt-1" placeholder="nome da categoria em PT">
+
+                    <button class="btn btn-primary mt-2">Create</button>
+
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <%- include("../../partials/script.ejs") %>
+    <%- include("../../partials/admin.ejs") %>
+</body>
+
+</html>
