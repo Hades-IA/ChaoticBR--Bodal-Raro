@@ -30,6 +30,8 @@
   background-color: #fefefe;
   justify-items: center;
 }
+
+
 #scans > div {
 margin-bottom: 20%;
 }
@@ -45,7 +47,7 @@ margin-bottom: 20%;
         <nav class="navbar navbar-top navbar-dark navbar-expand-lg  mb-0 bg-danger">
             <a href="?t=1" class="navbar-brand h1 mb-0">
                 <figure id='logo' alt='brand chaoticrp'>
-                    <img src="./public/img/logonovo.png" class="img-fluid logotipo" alt="logo da chaotic reborn">
+                    <img src="./public/img/bodalbr.png" class="img-fluid logotipo" alt="logo da chaotic reborn">
                     <p>chaotic-rp</p>
                 </figure>
             </a>
@@ -58,10 +60,10 @@ margin-bottom: 20%;
     
                     
                     <li class="nav-item">
-                        <a href="/collection/0" class="nav-link ">COLLECTION</a>
+                        <a href="./index.html" class="nav-link ">COLLECTION</a>
                     </li>
                    <li class="nav-item">
-                        <a href="/booster" class="nav-link ">BOOSTER</a>
+                        <a href="./booster.html" class="nav-link ">BOOSTER</a>
                     </li>
     
                 </ul>
@@ -77,8 +79,8 @@ margin-bottom: 20%;
 
 
  
-
-
+    
+      
     <div class="container container-collections mt-auto mb-auto">
 
         
@@ -212,10 +214,15 @@ for (let i = loopCounter; i < cardsRange; i++) {
     try {
         if( cards[i].name.length > 1 ){ 
      let card = cards[i];
-       idElement.innerHTML +=  ` <div>
-               <h6>${card.name}</h6>
-               <img src="${card.url}"> </img>
+       idElement.innerHTML +=  ` <div id="${card.id}" onclick=pop_up(${card.id})>
+               <h6  >${card.name}</h6>
+               <img  src="${card.url}"> <div class="popup">
+                     <span class="popuptext"">${card.bodybr}</span>
+                 </div> </img>
+               
            </div>` ;
+     
+      
        }
     } catch (error) {
         i = cardsRange
@@ -225,7 +232,14 @@ for (let i = loopCounter; i < cardsRange; i++) {
 }
 
   
+    function pop_up(id) {
+        let cardpopup = document.getElementById(id);
+       
+   
+       
+        cardpopup.getElementsByClassName("popuptext")[0].classList.toggle("show") 
 
+    }
  </script> 
 
     <!--firebase pode ir de base se n suportar o bootstrap4-->

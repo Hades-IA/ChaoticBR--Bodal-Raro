@@ -6,6 +6,7 @@
   max-width: fit-content;
 }
 .logotipo {
+    max-width: 60px;
     max-height: 60px;
     padding-top: 10px; }
   
@@ -163,24 +164,94 @@
 #collection > div,#scans > div{
   display: flex;
   flex-direction: column;
-  width: 250px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 250px;
   margin-top: 10%;
   align-items: center;
   justify-content: center;
   overflow: auto;
+  cursor: pointer;
 }
+
+#collection > div > img,#scans > div > img{
+  width: 190px;
+  max-width: 100%;
+
+}
+
 #collection > div > button,#scans > div > button{
   width: 100%;
 }
 
+/* Popup container */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  width: inherit;
+  max-width: 95%;
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+  visibility: hidden;
+  display: none;
+  max-width: 100%;
+  width: 250px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  font-size: 12px;
+ 
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+  visibility: visible;
+  display: block;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
   /*@medias*/
   @media (max-width: 830px) {
+    #collection,#scans{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+    }
     .grid-cards {
       grid-template-columns: 1fr; }
   
     .grid-decks {
       grid-template-columns: 1fr; }
+
+      
+    
   .container-collections{
     display: flex;
     flex-direction: column;
@@ -205,12 +276,15 @@
   
     .siteCenter {
       max-width: 90vw; } }
-  
+
+
       @media (max-width:600px){
         #collection,#scans{
           display: grid;
-          grid-template-columns: 1fr;
+          grid-template-columns: 1fr 1fr;
+
         }
+
         .grid-cards {
           grid-template-columns: 1fr; }
       
