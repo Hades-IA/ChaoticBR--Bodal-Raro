@@ -42,7 +42,7 @@ try {
         let card = cards[i];
         idElement.innerHTML += ` <div id="${card.id}" onclick=pop_up(${card.id})>
                 <h6  >${card.name}</h6>
-                <img  src="${card.url}" crossorigin="anonymous"> <div class="popup">
+                <img  src="${card.url}" SameSite=Lax crossorigin="anonymous"> <div class="popup">
                       <span class="popuptext"">${card.bodybr}</span>
                   </div> </img>
                 
