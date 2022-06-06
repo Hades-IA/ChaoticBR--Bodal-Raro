@@ -64,36 +64,52 @@ try {
 }
 
 // codigo danova pagina, gerar os cards mais usados dinamicamente pegando o valor da tribo pelo alt
-try {
-  var cardMostUsed = {
-    danian: [
-      `<div id="card.id"> <h6>AZAIA Mindprobe</h6> <a href="card.id"><img src="https://i.imgur.com/S2vfbgF.png" crossorigin="anonymous"></a> </img> </div>`,
-      `<div id="card.id"> <h6>AZAIA Mindprobe</h6> <a href="card.id"><img src="https://i.imgur.com/S2vfbgF.png" crossorigin="anonymous"></a> </img> </div>`,
-      `<div id="card.id"> <h6>AZAIA Mindprobe</h6> <a href="card.id"><img src="https://i.imgur.com/S2vfbgF.png" crossorigin="anonymous"></a> </img> </div>`,
-      `<div id="card.id"> <h6>AZAIA Mindprobe</h6> <a href="card.id"><img src="https://i.imgur.com/S2vfbgF.png" crossorigin="anonymous"></a> </img> </div>`,
-      `<div id="card.id"> <h6>AZAIA Mindprobe</h6> <a href="card.id"><img src="https://i.imgur.com/S2vfbgF.png" crossorigin="anonymous"></a> </img> </div>`,
-      `<div id="card.id"> <h6>AZAIA Mindprobe</h6> <a href="card.id"><img src="https://i.imgur.com/S2vfbgF.png" crossorigin="anonymous"></a> </img> </div>`,
-    ],
-    mipedian: [],
-    overworld: [],
-    underworld: [],
-    marr: [],
-    generic: [],
-    tribeFilter() {
-      let tribeActive = this.getTribeActive();
-      console.log(cardMostUsed[tribeActive]);
-    },
-    getTribeActive() {
-      let $tribeActive = document.querySelector(
-        "#tribe-selector .active"
-      ).firstChild;
-      return $tribeActive.getAttributeNode("name").value;
-    },
-  };
 
-  // add event listerne onclick nos filtros pra ativar o metodo trivefilter assim pegando o html e jogando para uma fução dem udar o html dianmicamente.
+const $tribeActiveFilter = document.querySelector("#tribe-selector-filter");
+$tribeActiveFilter.addEventListener("click", tribeFilter);
+let $mostusedcards = document.querySelector("#most-used-cards");
 
-  cardMostUsed.tribeFilter();
-} catch (error) {
-  console.log(error);
+const cardMostUsed = {
+  danian: [
+    `<div id="card.id"> <h6>AZAIA Mindprobe</h6> <a href="./colecao?c=card.id"><img src="https://i.imgur.com/S2vfbgF.png" crossorigin="anonymous"></a> </img> </div>`,
+    `<div id="card.id"> <h6>AZAIA Mindprobe</h6> <a href="./colecao?c=card.id"><img src="https://i.imgur.com/S2vfbgF.png" crossorigin="anonymous"></a> </img> </div>`,
+    `<div id="card.id"> <h6>AZAIA Mindprobe</h6> <a href="./colecao?c=card.id"><img src="https://i.imgur.com/S2vfbgF.png" crossorigin="anonymous"></a> </img> </div>`,
+    `<div id="card.id"> <h6>AZAIA Mindprobe</h6> <a href="./colecao?c=card.id"><img src="https://i.imgur.com/S2vfbgF.png" crossorigin="anonymous"></a> </img> </div>`,
+    `<div id="card.id"> <h6>AZAIA Mindprobe</h6> <a href="./colecao?c=card.id"><img src="https://i.imgur.com/S2vfbgF.png" crossorigin="anonymous"></a> </img> </div>`,
+    `<div id="card.id"> <h6>AZAIA Mindprobe</h6> <a href="./colecao?c=card.id"><img src="https://i.imgur.com/S2vfbgF.png" crossorigin="anonymous"></a> </img> </div>`,
+    `<div id="card.id"> <h6>AZAIA Mindprobe</h6> <a href="./colecao?c=card.id"><img src="https://i.imgur.com/S2vfbgF.png" crossorigin="anonymous"></a> </img> </div>`,
+    `<div id="card.id"> <h6>AZAIA Mindprobe</h6> <a href="./colecao?c=card.id"><img src="https://i.imgur.com/S2vfbgF.png" crossorigin="anonymous"></a> </img> </div>`,
+    `<div id="card.id"> <h6>AZAIA Mindprobe</h6> <a href="./colecao?c=card.id"><img src="https://i.imgur.com/S2vfbgF.png" crossorigin="anonymous"></a> </img> </div>`,
+  ],
+  mipedian: [],
+  overworld: [],
+  underworld: [],
+  marr: [],
+  generic: [],
+  tribeFilter() {
+    let tribeActive = this.getTribeActive();
+    let cardhtml = "";
+    cardMostUsed[tribeActive].forEach((card) => (cardhtml += card));
+
+    return cardhtml;
+  },
+  getTribeActive() {
+    let $tribeActive = document.querySelector(
+      "#tribe-selector-filter .active"
+    ).firstChild;
+    return $tribeActive.getAttributeNode("name").value;
+  },
+};
+
+function tribeFilter(params) {
+  let $tribeActive = document
+    .querySelector("#tribe-selector-filter .active")
+    .classList.remove("active");
+  params.target.classList.toggle("active");
+  let cardCollection = cardMostUsed.tribeFilter();
+
+  $mostusedcards.innerHTML = cardCollection;
 }
+$mostusedcards.innerHTML = cardMostUsed.tribeFilter();
+
+// add event listerne onclick nos filtros pra ativar o metodo trivefilter assim pegando o html e jogando para uma fução dem udar o html dianmicamente.

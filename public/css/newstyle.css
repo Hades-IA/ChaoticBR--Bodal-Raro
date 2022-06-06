@@ -108,6 +108,10 @@ img {
 #tribe-selector-filter li {
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.705));
   opacity: 0.6;
+  cursor: pointer;
+}
+#tribe-selector-filter li img {
+  pointer-events: none;
 }
 
 #tribe-selector .active {
@@ -119,6 +123,7 @@ img {
   grid: 1fr / repeat(3, minmax(220px, 1fr));
   gap: 20px 40px;
   justify-items: center;
+  margin: 20px 0;
 }
 
 #most-used-cards > div {
