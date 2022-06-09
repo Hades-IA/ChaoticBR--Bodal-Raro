@@ -40,6 +40,7 @@ img {
 .container {
   max-width: 100%;
   width: 940px;
+  height: 100vw;
 }
 
 .tribe-banner {
@@ -136,6 +137,35 @@ img {
   color: #fff;
 }
 
+.btnCalltoaction {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.btnCalltoaction a {
+  margin: 0 10px;
+  max-width: 350px;
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+footer {
+  background-color: #404d49;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  line-height: 1.19px;
+  text-align: center;
+  color: #ffffff;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 40px 0 0 0;
+}
 /*X-Small devices (portrait phones, less than 576px)*/
 /*No media query for `xs` since this is the default in Bootstrap*/
 
@@ -144,7 +174,9 @@ img {
   .navbar {
     font-size: 0.85rem;
   }
-
+  .btnCalltoaction a {
+    font-size: 0.85rem;
+  }
   .navcenter {
     margin-left: unset;
     margin-right: unset;
@@ -165,13 +197,28 @@ img {
     font-size: 0.625rem;
     line-height: 0.8125rem;
   }
+
+  #most-used-cards {
+    grid: 1fr / repeat(2, 1fr);
+    gap: 10px 20px;
+    margin: 20px 0;
+  }
+
+  #tribe-selector {
+    font-size: 0.6rem;
+    line-height: 0.75rem;
+  }
+  #tribe-selector-filter {
+    padding-inline-start: 0;
+  }
+  footer {
+    font-size: 0.8rem;
+    line-height: 0.9;
+  }
 }
 
 /*Medium devices (tablets, 768px and up)*/
 @media (max-width: 768px) {
-  #most-used-cards {
-    gap: 20px 40px;
-  }
 }
 
 /*Large devices (desktops, 992px and up)*/
