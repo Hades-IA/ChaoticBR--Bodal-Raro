@@ -23,41 +23,43 @@
 </head>
 
 <body>
-    <nav class="navbar sticky-top navbar-expand-md navbar-dark">
-        <div class="container-fluid">
-            <div class="navcenter d-flex">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item me-3">
-                            <a class="nav-link active" aria-current="page" href="./index.html">Inicio</a>
-                        </li>
-                        <li class="nav-item me-3">
-                            <a class="nav-link" aria-current="page" href="./colecao">Coleção de Cartas</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Outros
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li>
-                                    <a class="dropdown-item" href="./booster.html">Simulador de Booster</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item disabled" href="#">Chaoticmon</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+    <header>
+        <nav class="navbar sticky-top navbar-expand-md navbar-dark">
+            <div class="container-fluid">
+                <div class="navcenter d-flex">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item me-3">
+                                <a class="nav-link active" aria-current="page" href="./index.html">Inicio</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link" aria-current="page" href="./colecao">Coleção de Cartas</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Outros
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <a class="dropdown-item" href="./booster.html">Simulador de Booster</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item disabled" href="#">Chaoticmon</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
 
     <div class="container">
@@ -178,7 +180,7 @@
         </section>
 
         <section class="menus" aria-label="menus">
-            <div class="atk-menu">
+            <div class="atk-menu menu-ativo" aria-label="ataques menus">
                 <div class="atk">
                     <img src="./public/img/atk-super-rare-15.png" alt="ataque image" />
                     <h4 class="atk-title">flame orb</h4>
@@ -199,6 +201,58 @@
                     <h4 class="atk-title">flame orb</h4>
                     <p class="CD">CD <span class="CD-time">1/1</span></p>
                 </div>
+            </div>
+
+            <div class="actions-menu menu-desativado" aria-label="menu de outra ações">
+                <div class=" btn action">
+                    <p>Esquivar</p>
+                </div>
+                <div class="btn action">
+                    <p>Defender</p>
+                </div>
+                <div class="btn action">
+                    <p>Usar local</p>
+                </div>
+                <div class="btn action">
+                    <p>Intimidar</p>
+                </div>
+            </div>
+
+            <div class="mugic-menu menu-desativado" aria-label="menu de mugics">
+                <div>
+                    <p>CD</p>
+                </div>
+                <div>
+                    <p>CD</p>
+                </div>
+                <div>
+                    <p>CD</p>
+                </div>
+                <div>
+                    <p>CD</p>
+                </div>
+            </div>
+
+            <div class="mesa-menu menu-desativado" aria-label="menu da mesa">
+                <div>
+                    <p>CD</p>
+                </div>
+                <div>
+                    <p>CD</p>
+                </div>
+                <div>
+                    <p>CD</p>
+                </div>
+                <div>
+                    <p>CD</p>
+                </div>
+            </div>
+            <div class="menus-bar" aria-label="barra de menus">
+                <button class="btn btn-over menus-bar-button" data-menu-open="actions-menu">Ações</button>
+                <button class="btn btn-under menus-bar-button menus-bar-button-active"
+                    data-menu-open="atk-menu">Atacar</button>
+                <button class="btn btn-mipe menus-bar-button" data-menu-open="mugic-menu">Mugic</button>
+                <button class="btn btn-danian menus-bar-button" data-menu-open="mesa-menu">Mesa</button>
             </div>
         </section>
     </div>
