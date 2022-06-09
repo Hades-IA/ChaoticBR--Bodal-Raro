@@ -25,7 +25,7 @@ document.querySelector("#collection").addEventListener("input", function () {
   let imgurl = boostersImg.filter((data) => data.title === value)[0];
   document.querySelector("#banner-img").src = imgurl.url;
 });
-
+("");
 var mybutton = document.getElementById("myBtn");
 
 // When the user scrolls down 20px from the top of the document, show the button
@@ -152,7 +152,7 @@ function draw(qtn = 1, box = false, collection = false, Notype = false) {
     pack1.forEach((cards) => {
       let imgHtml = "";
       cards.forEach((card) => {
-        imgHtml += `<div> <h2 class="titleCard" >| ${card.title} |</h2> <img class="cardChaotic" src="${card.url} SameSite=Lax" alt=""></div>`;
+        imgHtml += `<div> <h2 class="titleCard" >| ${card.title} |</h2> <img class="cardChaotic" src="${card.url} "  alt="" SameSite=Lax></div>`;
       });
       num++;
       html += `<h2 class="ml-auto mr-auto " >Booster ${num} </h2><div class="pack">${imgHtml}</div>`;
