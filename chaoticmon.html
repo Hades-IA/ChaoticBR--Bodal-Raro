@@ -181,22 +181,22 @@
 
         <section class="menus" aria-label="menus">
             <div class="atk-menu menu-ativo" aria-label="ataques menus">
-                <div class="atk">
+                <div class="atk" data-atkName="atk.name">
                     <img src="./public/img/atk-super-rare-15.png" alt="ataque image" />
                     <h4 class="atk-title">flame orb</h4>
                     <p class="CD">CD <span class="CD-time">1/1</span></p>
                 </div>
-                <div class="atk">
+                <div class="atk" data-atkName="atk.name">
                     <img src="./public/img/atk-super-rare-15.png" alt="ataque image" />
                     <h4 class="atk-title">flame orb</h4>
                     <p class="CD">CD <span class="CD-time">1/1</span></p>
                 </div>
-                <div class="atk">
+                <div class="atk" data-atkName="atk.name">
                     <img src="./public/img/atk-super-rare-15.png" alt="ataque image" />
                     <h4 class="atk-title">flame orb</h4>
                     <p class="CD">CD <span class="CD-time">1/1</span></p>
                 </div>
-                <div class="atk">
+                <div class="atk" data-atkName="atk.name">
                     <img src="./public/img/atk-super-rare-15.png" alt="ataque image" />
                     <h4 class="atk-title">flame orb</h4>
                     <p class="CD">CD <span class="CD-time">1/1</span></p>
@@ -204,55 +204,119 @@
             </div>
 
             <div class="actions-menu menu-desativado" aria-label="menu de outra ações">
-                <div class=" btn action">
+                <div class=" btn action" data-action="esquiva">
                     <p>Esquivar</p>
                 </div>
-                <div class="btn action">
+                <div class="btn action" data-action="defesa">
                     <p>Defender</p>
                 </div>
-                <div class="btn action">
+                <div class="btn action" data-action="localEvent">
                     <p>Usar local</p>
                 </div>
-                <div class="btn action">
+                <div class="btn action" data-action="intimidar">
                     <p>Intimidar</p>
                 </div>
             </div>
 
             <div class="mugic-menu menu-desativado" aria-label="menu de mugics">
-                <div>
-                    <p>CD</p>
+                <div class="btn mugic under" data-mugicName="mugic.name">
+                    <p>mugic.name</p>
                 </div>
-                <div>
-                    <p>CD</p>
+                <div class="btn mugic mipe" data-mugicName="mugic.name">
+                    <p>mugic.name</p>
                 </div>
-                <div>
-                    <p>CD</p>
+                <div class="btn mugic danian" data-mugicName="mugic.name">
+                    <p>mugic.name</p>
                 </div>
-                <div>
-                    <p>CD</p>
+                <div class="btn mugic over" data-mugicName="mugic.name">
+                    <p>mugic.name</p>
+                </div>
+                <div class="btn mugic" data-mugicName="mugic.name">
+                    <p>mugic.name</p>
+                </div>
+                <div class="btn mugic" data-mugicName="mugic.name">
+                    <p>mugic.name</p>
                 </div>
             </div>
 
             <div class="mesa-menu menu-desativado" aria-label="menu da mesa">
-                <div>
-                    <p>CD</p>
+                <div class="btn mesa under " data-creatureboard="4">
+                    <p>vazio</p>
                 </div>
-                <div>
-                    <p>CD</p>
+                <div class="btn mesa mipe " data-creatureboard="1">
+                    <p>mesa.name 2</p>
                 </div>
-                <div>
-                    <p>CD</p>
+                <div class="btn mesa danian " data-creatureboard="5">
+                    <p>mesa.name</p>
                 </div>
-                <div>
-                    <p>CD</p>
+                <div class="btn mesa over " data-creatureboard="2">
+                    <p>mesa.name 4</p>
+                </div>
+                <div class="btn mesa " data-creatureboard="6">
+                    <p>mesa.name 5</p>
+                </div>
+                <div class="btn mesa " data-creatureboard="3">
+                    <p>mesa.name 6</p>
                 </div>
             </div>
-            <div class="menus-bar" aria-label="barra de menus">
+            <div class="creature-board-menu menu-desativado" aria-label=" informações dos ataques da criatura ataques ">
+
+                <img src="./public/img/ARIAS-overworld.png" class="crature-board-img" alt="imagem da creatura">
+
+                <div class="section-atk-board">
+                    <div class="atk" data-atkName="atk.name">
+                        <img src="./public/img/atk-super-rare-15.png" alt="ataque image" />
+                        <h4 class="atk-title">flame orb</h4>
+                        <p class="CD">CD <span class="CD-time">1/1</span></p>
+                    </div>
+                    <div class="atk" data-atkName="atk.name">
+                        <img src="./public/img/atk-super-rare-15.png" alt="ataque image" />
+                        <h4 class="atk-title">flame orb</h4>
+                        <p class="CD">CD <span class="CD-time">1/1</span></p>
+                    </div>
+                    <div class="atk" data-atkName="atk.name">
+                        <img src="./public/img/atk-super-rare-15.png" alt="ataque image" />
+                        <h4 class="atk-title">flame orb</h4>
+                        <p class="CD">CD <span class="CD-time">1/1</span></p>
+                    </div>
+                    <div class="atk" data-atkName="atk.name">
+                        <img src="./public/img/atk-super-rare-15.png" alt="ataque image" />
+                        <h4 class="atk-title">flame orb</h4>
+                        <p class="CD">CD <span class="CD-time">1/1</span></p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- menus de barra pra outras interfaces -->
+            <div class="menus-bar  menus-bar-ativo" aria-label="barra de menus">
                 <button class="btn btn-over menus-bar-button" data-menu-open="actions-menu">Ações</button>
                 <button class="btn btn-under menus-bar-button menus-bar-button-active"
                     data-menu-open="atk-menu">Atacar</button>
                 <button class="btn btn-mipe menus-bar-button" data-menu-open="mugic-menu">Mugic</button>
                 <button class="btn btn-danian menus-bar-button" data-menu-open="mesa-menu">Mesa</button>
+            </div>
+            <div class="menu-board menus-bar-des" aria-label="menus de olhar as mesas">
+                <button class="btn btn-under menus-bar-button" data-menuarrow="back"
+                    aria-label="voltar pra mesa anterior"><img src="./public/img/arrowleft.svg" alt=""></button>
+                <button class="btn btn-under menus-bar-button" data-menuarrow="next"
+                    aria-label="avançar pra proxima mesa"><img src="./public/img/arrowlrigth.svg" alt=""></button>
+                <button class="btn btn-under menus-bar-button" data-menuarrow="close"
+                    aria-label="voltar pra barra de menus"><img src="./public/img/arrowback.svg" alt=""></button>
+
+            </div>
+            <div class="menu-board menus-bar-des" aria-label="menus de olhar as mesas">
+                <button class="btn btn-under menus-bar-button" data-menuarrow="back"
+                    aria-label="voltar pra mesa anterior">
+                    <p>Detalhes</p>
+                </button>
+                <button class="btn btn-under menus-bar-button" data-menuarrow="next"
+                    aria-label="avançar pra proxima mesa">
+                    <p>Habilidade</p>
+                </button>
+                <button class="btn btn-under menus-bar-button" data-menuarrow="close"
+                    aria-label="voltar pra barra de menus"><img src="./public/img/arrowback.svg" alt=""></button>
+
             </div>
         </section>
     </div>
@@ -267,8 +331,8 @@
 
     <!-- Bootstrap 5-->
     <script src="./public/bootstrap 5/bootstrap.bundle.min.js"></script>
-    <script src="./database/db.js"></script>
-    <script src="./public/js/chaoticmon.js"></script>
+    <!-- <script src="./database/db.js"></script> -->
+    <script type="module" src="./public/js/chaoticmon.js"></script>
 </body>
 
 </html>
