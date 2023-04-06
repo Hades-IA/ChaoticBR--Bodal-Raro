@@ -26,6 +26,7 @@ document.querySelector("#collection").addEventListener("input", function () {
   document.querySelector("#banner-img").src = imgurl.url;
 });
 ("");
+
 var mybutton = document.getElementById("myBtn");
 
 // When the user scrolls down 20px from the top of the document, show the button
@@ -73,22 +74,6 @@ class Arithmetic {
     return false;
   }
 }
-
-const rate = new Arithmetic();
-
-const cards = cardsJson;
-
-const cardsPromo = cards.filter((card) => {
-  let rarety = card.cardtype.filter((cardtype) => cardtype.title === "promo");
-
-  return rarety.length > 0;
-});
-//listern
-document.getElementById("starter").addEventListener("click", Start);
-document.querySelectorAll(".download").forEach((btn) => {
-  btn.addEventListener("click", downloadstart);
-});
-//function
 function downloadstart() {
   let filename = "lista_de_cartas";
   let openBoosters = document.querySelector(".openBoosters").innerText;
@@ -111,313 +96,336 @@ function download(filename, text) {
 
   document.body.removeChild(element);
 }
-function Start() {
-  let removeType = document.querySelector("#remove-card").value;
-  let Collection = document.querySelector("#collection").value;
-  let qtn = document.querySelector("#qtn").value;
-  let BoosterBox = document.querySelector("#box").title;
-
-  if (BoosterBox === "true") {
-    BoosterBox = true;
-  } else {
-    BoosterBox = false;
-  }
-
-  draw(qtn, BoosterBox, Collection, removeType);
-}
-
-//botão para escolher boosters individual ou box.
-//botão para escolher  coleção ou tds por padrão, se vai ter ataque ou n
-// uma selection para baixar um txt com uma lista de tds os cards
-//input para quantidade de boosters
-// depois um botão para abrir tds os boosters
-
-// booster txt para o download
-
-function draw(qtn = 1, box = false, collection = false, Notype = false) {
-  const packs = BoosterOpening(qtn, box, collection, Notype);
-
-  const divDraw = document.querySelector("#id");
-  let pack1 = packs.map((booster) =>
-    booster.map((cards) => {
-      return {
-        title: cards.name,
-        url: cards.url,
-      };
-    })
-  );
-  let makePack = () => {
-    let html = "";
-    let num = 0;
-    pack1.forEach((cards) => {
-      let imgHtml = "";
-      cards.forEach((card) => {
-        imgHtml += `<div> <h2 class="titleCard" >| ${card.title} |</h2> <img class="cardChaotic" src="${card.url} "  alt="" SameSite=Lax></div>`;
-      });
-      num++;
-      html += `<h2 class="ml-auto mr-auto " >Booster ${num} </h2><div class="pack">${imgHtml}</div>`;
-    });
-    return html;
-  };
-
-  divDraw.innerHTML = `
-<div>
-<div class="openBoosters">
-${makePack()}
-</div>
-</div>`;
-}
-
-function Booster(
-  ultra = false,
-  superrare = false,
-  collection = false,
-  Notype = false
-) {
-  let cards = [];
-  let {
-    cardsCommom,
-    cardsUncommom,
-    cardsRare,
-    cardsSuperRare,
-    cardsUltraRare,
-  } = collectionFilter(collection, Notype);
-
-  for (let i = 0; i < 4; i++) {
-    let randomNum = rate.getRandomIntInclusive(0, cardsCommom.length - 1) || 0;
-    cards.push(cardsCommom[randomNum]);
-  }
-
-  for (let i = 0; i < 3; i++) {
-    let randomNum =
-      rate.getRandomIntInclusive(0, cardsUncommom.length - 1) || 0;
-    cards.push(cardsUncommom[randomNum]);
-  }
-
-  if (ultra) {
-    cards.push(
-      cardsUltraRare[
-        rate.getRandomIntInclusive(0, cardsUltraRare.length - 1) || 0
-      ]
-    );
-    cards.push(
-      cardsRare[rate.getRandomIntInclusive(0, cardsRare.length - 1) || 0]
-    );
-    return cards;
-  }
-
-  if (superrare) {
-    cards.push(
-      cardsSuperRare[
-        rate.getRandomIntInclusive(0, cardsSuperRare.length - 1) || 0
-      ]
-    );
-    cards.push(
-      cardsRare[rate.getRandomIntInclusive(0, cardsRare.length - 1) || 0]
-    );
-    return cards;
-  }
-
-  if (rate.chance(1)) {
-    cards.push(
-      cardsPromo[rate.getRandomIntInclusive(0, cardsPromo.length - 1) || 0]
-    );
-  }
-
-  if (rate.chance(5)) {
-    cards.push(
-      cardsUltraRare[
-        rate.getRandomIntInclusive(0, cardsUltraRare.length - 1) || 0
-      ]
-    );
-    cards.push(
-      cardsRare[rate.getRandomIntInclusive(0, cardsRare.length - 1) || 0]
-    );
-    return cards;
-  }
-
-  if (rate.chance(30)) {
-    cards.push(
-      cardsSuperRare[
-        rate.getRandomIntInclusive(0, cardsSuperRare.length - 1) || 0
-      ]
-    );
-    cards.push(
-      cardsRare[rate.getRandomIntInclusive(0, cardsRare.length - 1) || 0]
-    );
-    return cards;
-  }
-
-  cards.push(
-    cardsRare[rate.getRandomIntInclusive(0, cardsRare.length - 1) || 0]
-  );
-  cards.push(
-    cardsRare[rate.getRandomIntInclusive(0, cardsRare.length - 1) || 0]
-  );
-  return cards;
-}
-
-function BoosterOpening(
-  boostersNum = false,
-  box = false,
-  collection = false,
-  Notype = false
-) {
-  let boosters = boostersNum;
-  let result = [];
-  if (box) {
-    for (let i = 0; i < boosters; i++) {
-      for (let i = 0; i < 24; i++) {
-        if (i === 15) {
-          let superRare = 0;
-          let ultraRare = 0;
-          let cardsRoll = result.map((booster) =>
-            booster.map(
-              (card) =>
-                card.cardtype.filter(
-                  (rarety) =>
-                    rarety.title == "commom" ||
-                    rarety.title == "uncommon" ||
-                    rarety.title == "rare" ||
-                    rarety.title == "super rare" ||
-                    rarety.title == "ultra rare"
-                )[0]
-            )
-          );
-
-          cardsRoll.forEach((booster) => {
-            booster.forEach((rarety) => {
-              if (rarety.title === "super rare") superRare++;
-              if (rarety.title === "ultra rare") ultraRare++;
-            });
-          });
-
-          if (superRare < 8) {
-            let min = 8 - superRare;
-            i = i + min;
-            for (let n = 0; n <= min; n++) {
-              result.push(Booster(false, true, collection, Notype));
-            }
-          }
-
-          if (ultraRare < 1) {
-            let min = 1 - ultraRare;
-            i = i + min;
-            for (let n = 0; n < min; n++) {
-              result.push(Booster(true, false, collection, Notype));
-            }
-          }
-
-          if (superRare >= 8 && ultraRare >= 1) {
-            result.push(Booster(false, false, collection, Notype));
-          }
-        } else {
-          result.push(Booster(false, false, collection, Notype));
-        }
-      }
-    }
-
+async function Initiation() {
+  const rate = new Arithmetic();
+  let cardsJson = await fetch("./database/db.json")
+    .then((response) => response.json())
+    .then((json) => json.data);
+  const cards = cardsJson.sort(function (a, b) {
+    result = a.name >= b.name ? 1 : -1;
     return result;
-  } else {
-    for (let i = 0; i < boosters; i++) {
-      result.push(Booster(false, false, collection, Notype));
-    }
-    return result;
-  }
-}
-
-function collectionFilter(collectionFilter = false, Notype = false) {
-  if (collectionFilter == "false") collectionFilter = false;
-
-  const cards = cardsJson.filter((card) => {
-    let noRecode = [];
-    let notype = card.cardtype.filter(
-      (cardtype) => cardtype.title === `${Notype}`
-    );
-    let collection = card.cardtype.filter(
-      (cardtype) => cardtype.title === `${collectionFilter}`
-    );
-
-    if (collectionFilter && Notype) {
-      return (
-        collection.length > 0 && noRecode.length === 0 && notype.length === 0
-      );
-    }
-
-    if (collectionFilter) {
-      return collection.length > 0 && noRecode.length === 0;
-    }
-
-    if (Notype) {
-      return notype.length === 0 && noRecode.length === 0;
-    }
-
-    return card.name.length > 0;
   });
 
-  return raretyFilter(cards);
+  const cardsPromo = cards.filter((card) => {
+    let rarety = card.cardtype.filter((cardtype) => cardtype.title === "promo");
 
-  function raretyFilter(cards) {
-    const cardsCommom = cards.filter((card) => {
-      let rarety = card.cardtype.filter(
-        (cardtype) => cardtype.title === "commom" && cardtype.title !== "promo"
+    return rarety.length > 0;
+  });
+  //listern
+  document.getElementById("starter").addEventListener("click", Start);
+  document.querySelectorAll(".download").forEach((btn) => {
+    btn.addEventListener("click", downloadstart);
+  });
+
+  function Start() {
+    let removeType = document.querySelector("#remove-card").value;
+    let Collection = document.querySelector("#collection").value;
+    let qtn = document.querySelector("#qtn").value;
+    let BoosterBox = document.querySelector("#box").title;
+
+    if (BoosterBox === "true") {
+      BoosterBox = true;
+    } else {
+      BoosterBox = false;
+    }
+
+    draw(qtn, BoosterBox, Collection, removeType);
+  }
+
+  //botão para escolher boosters individual ou box.
+  //botão para escolher  coleção ou tds por padrão, se vai ter ataque ou n
+  // uma selection para baixar um txt com uma lista de tds os cards
+  //input para quantidade de boosters
+  // depois um botão para abrir tds os boosters
+
+  // booster txt para o download
+
+  function draw(qtn = 1, box = false, collection = false, Notype = false) {
+    const packs = BoosterOpening(qtn, box, collection, Notype);
+
+    const divDraw = document.querySelector("#id");
+    let pack1 = packs.map((booster) =>
+      booster.map((cards) => {
+        return {
+          title: cards.name,
+          url: cards.url,
+        };
+      })
+    );
+    let makePack = () => {
+      let html = "";
+      let num = 0;
+      pack1.forEach((cards) => {
+        let imgHtml = "";
+        cards.forEach((card) => {
+          imgHtml += `<div> <h2 class="titleCard" >| ${card.title} |</h2> <img class="cardChaotic" src="${card.url} "  alt="" SameSite=Lax></div>`;
+        });
+        num++;
+        html += `<h2 class="ml-auto mr-auto " >Booster ${num} </h2><div class="pack">${imgHtml}</div>`;
+      });
+      return html;
+    };
+
+    divDraw.innerHTML = `
+  <div>
+  <div class="openBoosters">
+  ${makePack()}
+  </div>
+  </div>`;
+  }
+  function collectionFilter(collectionFilter = false, Notype = false) {
+    if (collectionFilter == "false") collectionFilter = false;
+
+    const cards = cardsJson.filter((card) => {
+      let noRecode = [];
+      let notype = card.cardtype.filter(
+        (cardtype) => cardtype.title === `${Notype}`
+      );
+      let collection = card.cardtype.filter(
+        (cardtype) => cardtype.title === `${collectionFilter}`
       );
 
-      return rarety.length > 0;
+      if (collectionFilter && Notype) {
+        return (
+          collection.length > 0 && noRecode.length === 0 && notype.length === 0
+        );
+      }
+
+      if (collectionFilter) {
+        return collection.length > 0 && noRecode.length === 0;
+      }
+
+      if (Notype) {
+        return notype.length === 0 && noRecode.length === 0;
+      }
+
+      return card.name.length > 0;
     });
 
-    const cardsUncommom = cards.filter((card) => {
-      let rarety = card.cardtype.filter(
-        (cardtype) =>
-          cardtype.title === "uncommon" && cardtype.title !== "promo"
-      );
+    return raretyFilter(cards);
 
-      return rarety.length > 0;
-    });
+    function raretyFilter(cards) {
+      const cardsCommom = cards.filter((card) => {
+        let rarety = card.cardtype.filter(
+          (cardtype) =>
+            cardtype.title === "commom" && cardtype.title !== "promo"
+        );
 
-    const cardsRare = cards.filter((card) => {
-      let rarety = card.cardtype.filter(
-        (cardtype) => cardtype.title === "rare" && cardtype.title !== "promo"
-      );
+        return rarety.length > 0;
+      });
 
-      return rarety.length > 0;
-    });
+      const cardsUncommom = cards.filter((card) => {
+        let rarety = card.cardtype.filter(
+          (cardtype) =>
+            cardtype.title === "uncommon" && cardtype.title !== "promo"
+        );
 
-    const cardsSuperRare = cards.filter((card) => {
-      let rarety = card.cardtype.filter(
-        (cardtype) =>
-          cardtype.title === "super rare" && cardtype.title !== "promo"
-      );
+        return rarety.length > 0;
+      });
 
-      return rarety.length > 0;
-    });
+      const cardsRare = cards.filter((card) => {
+        let rarety = card.cardtype.filter(
+          (cardtype) => cardtype.title === "rare" && cardtype.title !== "promo"
+        );
 
-    const cardsUltraRare = cards.filter((card) => {
-      let rarety = card.cardtype.filter(
-        (cardtype) =>
-          cardtype.title === "ultra rare" && cardtype.title !== "promo"
-      );
+        return rarety.length > 0;
+      });
 
-      return rarety.length > 0;
-    });
+      const cardsSuperRare = cards.filter((card) => {
+        let rarety = card.cardtype.filter(
+          (cardtype) =>
+            cardtype.title === "super rare" && cardtype.title !== "promo"
+        );
 
-    const cardsPromo = cards.filter((card) => {
-      let rarety = card.cardtype.filter(
-        (cardtype) => cardtype.title === "promo"
-      );
+        return rarety.length > 0;
+      });
 
-      return rarety.length > 0;
-    });
+      const cardsUltraRare = cards.filter((card) => {
+        let rarety = card.cardtype.filter(
+          (cardtype) =>
+            cardtype.title === "ultra rare" && cardtype.title !== "promo"
+        );
 
-    return {
+        return rarety.length > 0;
+      });
+
+      const cardsPromo = cards.filter((card) => {
+        let rarety = card.cardtype.filter(
+          (cardtype) => cardtype.title === "promo"
+        );
+
+        return rarety.length > 0;
+      });
+
+      return {
+        cardsCommom,
+        cardsUncommom,
+        cardsRare,
+        cardsSuperRare,
+        cardsUltraRare,
+        cardsPromo,
+      };
+    }
+  }
+  function Booster(
+    ultra = false,
+    superrare = false,
+    collection = false,
+    Notype = false
+  ) {
+    let cards = [];
+    let {
       cardsCommom,
       cardsUncommom,
       cardsRare,
       cardsSuperRare,
       cardsUltraRare,
-      cardsPromo,
-    };
+    } = collectionFilter(collection, Notype);
+
+    for (let i = 0; i < 4; i++) {
+      let randomNum =
+        rate.getRandomIntInclusive(0, cardsCommom.length - 1) || 0;
+      cards.push(cardsCommom[randomNum]);
+    }
+
+    for (let i = 0; i < 3; i++) {
+      let randomNum =
+        rate.getRandomIntInclusive(0, cardsUncommom.length - 1) || 0;
+      cards.push(cardsUncommom[randomNum]);
+    }
+
+    if (ultra) {
+      cards.push(
+        cardsUltraRare[
+          rate.getRandomIntInclusive(0, cardsUltraRare.length - 1) || 0
+        ]
+      );
+      cards.push(
+        cardsRare[rate.getRandomIntInclusive(0, cardsRare.length - 1) || 0]
+      );
+      return cards;
+    }
+
+    if (superrare) {
+      cards.push(
+        cardsSuperRare[
+          rate.getRandomIntInclusive(0, cardsSuperRare.length - 1) || 0
+        ]
+      );
+      cards.push(
+        cardsRare[rate.getRandomIntInclusive(0, cardsRare.length - 1) || 0]
+      );
+      return cards;
+    }
+
+    if (rate.chance(1)) {
+      cards.push(
+        cardsPromo[rate.getRandomIntInclusive(0, cardsPromo.length - 1) || 0]
+      );
+    }
+
+    if (rate.chance(5)) {
+      cards.push(
+        cardsUltraRare[
+          rate.getRandomIntInclusive(0, cardsUltraRare.length - 1) || 0
+        ]
+      );
+      cards.push(
+        cardsRare[rate.getRandomIntInclusive(0, cardsRare.length - 1) || 0]
+      );
+      return cards;
+    }
+
+    if (rate.chance(30)) {
+      cards.push(
+        cardsSuperRare[
+          rate.getRandomIntInclusive(0, cardsSuperRare.length - 1) || 0
+        ]
+      );
+      cards.push(
+        cardsRare[rate.getRandomIntInclusive(0, cardsRare.length - 1) || 0]
+      );
+      return cards;
+    }
+
+    cards.push(
+      cardsRare[rate.getRandomIntInclusive(0, cardsRare.length - 1) || 0]
+    );
+    cards.push(
+      cardsRare[rate.getRandomIntInclusive(0, cardsRare.length - 1) || 0]
+    );
+    return cards;
+  }
+
+  function BoosterOpening(
+    boostersNum = false,
+    box = false,
+    collection = false,
+    Notype = false
+  ) {
+    let boosters = boostersNum;
+    let result = [];
+    if (box) {
+      for (let i = 0; i < boosters; i++) {
+        for (let i = 0; i < 24; i++) {
+          if (i === 15) {
+            let superRare = 0;
+            let ultraRare = 0;
+            let cardsRoll = result.map((booster) =>
+              booster.map(
+                (card) =>
+                  card.cardtype.filter(
+                    (rarety) =>
+                      rarety.title == "commom" ||
+                      rarety.title == "uncommon" ||
+                      rarety.title == "rare" ||
+                      rarety.title == "super rare" ||
+                      rarety.title == "ultra rare"
+                  )[0]
+              )
+            );
+
+            cardsRoll.forEach((booster) => {
+              booster.forEach((rarety) => {
+                if (rarety.title === "super rare") superRare++;
+                if (rarety.title === "ultra rare") ultraRare++;
+              });
+            });
+
+            if (superRare < 8) {
+              let min = 8 - superRare;
+              i = i + min;
+              for (let n = 0; n <= min; n++) {
+                result.push(Booster(false, true, collection, Notype));
+              }
+            }
+
+            if (ultraRare < 1) {
+              let min = 1 - ultraRare;
+              i = i + min;
+              for (let n = 0; n < min; n++) {
+                result.push(Booster(true, false, collection, Notype));
+              }
+            }
+
+            if (superRare >= 8 && ultraRare >= 1) {
+              result.push(Booster(false, false, collection, Notype));
+            }
+          } else {
+            result.push(Booster(false, false, collection, Notype));
+          }
+        }
+      }
+
+      return result;
+    } else {
+      for (let i = 0; i < boosters; i++) {
+        result.push(Booster(false, false, collection, Notype));
+      }
+      return result;
+    }
   }
 }
 
+Initiation();
 //CriarJSON.Escrever("./emojis.json", emojilist)

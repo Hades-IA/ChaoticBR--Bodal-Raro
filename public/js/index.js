@@ -4,7 +4,7 @@ async function starter() {
     let cardsJson = await fetch("./database/db.json")
       .then((response) => response.json())
       .then((json) => json.data);
-    console.log(cardsJson);
+
     var cards = cardsJson.sort(function (a, b) {
       result = a.name >= b.name ? 1 : -1;
       return result;
@@ -12,8 +12,8 @@ async function starter() {
     var urlParams =
       location.search.length > 0 ? location.search.slice(1) : "p=1";
     var pageNum = urlParams.split("=")[1];
-    pageList(pageNum, cardsJson);
-    createCArdList(pageNum, cardsJson);
+    pageList(pageNum, cards);
+    createCArdList(pageNum, cards);
   } catch (error) {
     console.log(error);
   }

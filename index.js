@@ -1,21 +1,32 @@
 //constantes
-const express = require('express');
+const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const connection = require("./database/db");
 const session = require("express-session");
 const cookieSession = require("cookie-session");
-const http = require('http');
+const http = require("http");
 const https = require("https");
-const fs = require("fs");;
+const fs = require("fs");
 const helmet = require("helmet");
-
-
 
 const keycr = require("./keys/keyrc");
 
-
-
+// testar downlonad de json quanod refazer o db com uma boa estrutura de data
+function downloadJson(filename, data) {
+  //filename .json ou deixar sem uma extenção especifica para arquivo txt
+  const blob = new Blob([data], { type: "text/csv" });
+  if (window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveBlob(blob, filename);
+  } else {
+    const elem = window.document.createElement("a");
+    elem.href = window.URL.createObjectURL(blob);
+    elem.download = filename;
+    document.body.appendChild(elem);
+    elem.click();
+    document.body.removeChild(elem);
+  }
+}
 /*
 const admAuth = require("./middleweres/admmiddlewere")
 */
@@ -29,12 +40,14 @@ const CollectionController = require("./collection/CollectionController");
 const UserController = require("./user/UserController");
 const ADMController = require("./adm/admController");
 //db
-connection.authenticate().then(() => {
-    console.log("conecatado ao DB")
-}).catch((err) => {
-    console.log(`erro no DB:  ${err}`)
-})
-
+connection
+  .authenticate()
+  .then(() => {
+    console.log("conecatado ao DB");
+  })
+  .catch((err) => {
+    console.log(`erro no DB:  ${err}`);
+  });
 
 //tabelas
 const User = require("./user/04user");
@@ -44,31 +57,25 @@ const ADMTable = require("./adm/admDB");
 const Overview = require("./adm/overviewDB");
 const OverviewRate = require("./adm/overviewRate");
 function tabelas() {
-
-    for (let i = 0; i < 20; i++) {
-
-        var CardType = require("./collection/03cardtype");
-        var Article = require("./article/zArticle");
-        var CardCollection = require("./collection/CardCollection");
-        var zSearchCard = require("./collection/zsearchCard");
-
-    }
-
+  for (let i = 0; i < 20; i++) {
+    var CardType = require("./collection/03cardtype");
+    var Article = require("./article/zArticle");
+    var CardCollection = require("./collection/CardCollection");
+    var zSearchCard = require("./collection/zsearchCard");
+  }
 }
-tabelas()
-
-
-
-
+tabelas();
 
 //cookies
-app.use(cookieSession({
+app.use(
+  cookieSession({
     name: "cokiesdouser",
-    keys: ['key1', 'key2'],
+    keys: ["key1", "key2"],
     cookie: {
-        maxAge: 30 * 60 * 1000  // uma meia-hora
-    }
-}));
+      maxAge: 30 * 60 * 1000, // uma meia-hora
+    },
+  })
+);
 
 //app.use(helmet());
 //vews engine
@@ -79,61 +86,48 @@ app.use(bodyParser.json());
 
 app.use(express.static("public"));
 
-
-
-
 //rotas
 app.get("/", (req, res) => {
-    let page = 0;
-    let offset;
-    let limit = 40;
+  let page = 0;
+  let offset;
+  let limit = 40;
 
-    if (isNaN(page) || undefined) {
+  if (isNaN(page) || undefined) {
+    res.redirect("/collection/0");
+  } else {
+    offset = parseInt(page) * limit;
 
-        res.redirect("/collection/0")
-
-
-    } else {
-        offset = parseInt(page) * limit;
-
-        Card.findAndCountAll({ limit: limit, offset: offset, order: [["name", "ASC"]] }).then(cards => {
-            let next;
-            if (offset + limit >= cards.count) {
-                next = false;
-            } else {
-                next = true
-            }
-            let count = cards.count;
-            let tamanho = count / limit;
-            let result = {
-                cards: cards,
-                next: next,
-                page: parseInt(page),
-                pageNum: tamanho
-
-            }
-            res.render("partials/collection", {
-                result: result
-            })
-        }).catch(() => {
-            res.redirect("/")
-        })
-    };
-  })
-
-
-
-
-
-
-
-
-
-
-
+    Card.findAndCountAll({
+      limit: limit,
+      offset: offset,
+      order: [["name", "ASC"]],
+    })
+      .then((cards) => {
+        let next;
+        if (offset + limit >= cards.count) {
+          next = false;
+        } else {
+          next = true;
+        }
+        let count = cards.count;
+        let tamanho = count / limit;
+        let result = {
+          cards: cards,
+          next: next,
+          page: parseInt(page),
+          pageNum: tamanho,
+        };
+        res.render("partials/collection", {
+          result: result,
+        });
+      })
+      .catch(() => {
+        res.redirect("/");
+      });
+  }
+});
 
 //post
-
 
 //routers
 
@@ -142,42 +136,41 @@ app.use("/", articleController);
 app.use("/", CollectionController);
 app.use("/", UserController);
 app.use("/", ADMController);
-app.get('/sitemap.xml', function(req, res) {
-res.sendFile('/root/chaoticrp/sitemap/sitemap.xml');
-})
+app.get("/sitemap.xml", function (req, res) {
+  res.sendFile("/root/chaoticrp/sitemap/sitemap.xml");
+});
 app.get("/booster", (req, res) => {
-    res.render("boostter")
-})
-app.get('/robots.txt', function (req, res) {
-    res.type('text/plain');
-    res.send("User-agent: *\nDisallow: \nSitemap:https://www.chaoticrp.net/sitemap.xml");
+  res.render("boostter");
+});
+app.get("/robots.txt", function (req, res) {
+  res.type("text/plain");
+  res.send(
+    "User-agent: *\nDisallow: \nSitemap:https://www.chaoticrp.net/sitemap.xml"
+  );
 });
 const PORT = process.env.PORT || 80;
 
-
-
-
 //certbot certonly --webroot -w /srv/www/chaoticrp/ -d www.chaoticrp.net -d chaoticrp.net
-
 
 /*var httpsServer =  https.createServer({
  key: fs.readFileSync('./cert/privkey.pem')
     , cert: fs.readFileSync('./cert/fullchain.pem')}, app);
   */
 
-var httpsServer = https.createServer({
+var httpsServer = https.createServer(
+  {
     key: keycr,
     cert: fs.readFileSync("./cert/chaoticrp_net.crt"),
-    ca: [fs.readFileSync('./cert/SectigoRSADomainValidationSecureServerCA.crt'),
-    fs.readFileSync('./cert/USERTrustRSAAAACA.crt'),
-    fs.readFileSync("./cert/AAACertificateServices.crt")],
-}, app);
+    ca: [
+      fs.readFileSync("./cert/SectigoRSADomainValidationSecureServerCA.crt"),
+      fs.readFileSync("./cert/USERTrustRSAAAACA.crt"),
+      fs.readFileSync("./cert/AAACertificateServices.crt"),
+    ],
+  },
+  app
+);
 
 var httpServer = http.createServer(app);
 httpServer.listen(80);
 httpsServer.listen(443);
 // app.listen(PORT, () => {  console.log(`conecatado a porta ${PORT}`) });
-
-
-
-
